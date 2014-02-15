@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 
 		controller = new Controller();
+		controller.EnableGesture (Gesture.GestureType.TYPESWIPE);
+		controller.Config.SetFloat("Gesture.Swipe.MinVelocity", 5000f);
+		controller.Config.SetFloat("Gesture.Swipe.MinLength", 100f);
+//		controller.Config.SetFloat("Gesture.Swipe.MinVelocity", 500f);
+		controller.Config.Save();
 
 		galacticod = GameObject.Find("galacticod");
 		cc = galacticod.GetComponent<CharacterController> ();
@@ -31,11 +36,75 @@ public class GameManager : MonoBehaviour {
 
 		forwardSwim.Normalize();
 		forwardSwim *= codSpeed;
+//
+//		if(frame.Fingers.Count > 2){
+//			cc.Move(forwardSwim*Time.deltaTime);
+//		}
 
-		if(frame.Fingers.Count > 2){
-			cc.Move(forwardSwim*Time.deltaTime);
+		// Get gestures
+		GestureList gestures = frame.Gestures ();
+		for (int i = 0; i < gestures.Count; i++) {
+		    Gesture gesture = gestures [i];
+
+		    switch (gesture.Type) {
+//		    case Gesture.GestureType.TYPECIRCLE:
+//		        CircleGesture circle = new CircleGesture (gesture);
+//
+//		            // Calculate clock direction using the angle between circle normal and pointable
+//		        String clockwiseness;
+//		        if (circle.Pointable.Direction.AngleTo (circle.Normal) <= Math.PI / 4) {
+//		            //Clockwise if angle is less than 90 degrees
+//		            clockwiseness = "clockwise";
+//		        } else {
+//		            clockwiseness = "counterclockwise";
+//		        }
+//
+//		        float sweptAngle = 0;
+//
+//		            // Calculate angle swept since last frame
+//		        if (circle.State != Gesture.GestureState.STATESTART) {
+//		            CircleGesture previousUpdate = new CircleGesture (controller.Frame (1).Gesture (circle.Id));
+//		            sweptAngle = (circle.Progress - previousUpdate.Progress) * 360;
+//		        }
+//
+//		        SafeWriteLine ("Circle id: " + circle.Id
+//		                       + ", " + circle.State
+//		                       + ", progress: " + circle.Progress
+//		                       + ", radius: " + circle.Radius
+//		                       + ", angle: " + sweptAngle
+//		                       + ", " + clockwiseness);
+//		        break;
+		    case Gesture.GestureType.TYPESWIPE:
+		        SwipeGesture swipe = new SwipeGesture (gesture);
+				cc.Move(forwardSwim*Time.deltaTime);
+		        Debug.Log ("Swipe id: " + swipe.Id
+		                       + ", " + swipe.State
+		                       + ", position: " + swipe.Position
+		                       + ", direction: " + swipe.Direction
+		                       + ", speed: " + swipe.Speed);
+		        break;
+//		    case Gesture.GestureType.TYPEKEYTAP:
+//		        KeyTapGesture keytap = new KeyTapGesture (gesture);
+//		        SafeWriteLine ("Tap id: " + keytap.Id
+//		                       + ", " + keytap.State
+//		                       + ", position: " + keytap.Position
+//		                       + ", direction: " + keytap.Direction);
+//		        break;
+//		    case Gesture.GestureType.TYPESCREENTAP:
+//		        ScreenTapGesture screentap = new ScreenTapGesture (gesture);
+//		        SafeWriteLine ("Tap id: " + screentap.Id
+//		                       + ", " + screentap.State
+//		                       + ", position: " + screentap.Position
+//		                       + ", direction: " + screentap.Direction);
+//		        break;
+		    default:
+		        Debug.Log ("Unknown gesture type.");
+		        break;
+		    }
 		}
 
+
+		
 	}
 
 }
