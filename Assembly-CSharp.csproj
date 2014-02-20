@@ -102,7 +102,9 @@
      <Compile Include="Assets\Scripts\Objects\Triggers and Switches\ImmediateReturn.cs" />
      <Compile Include="Assets\Scripts\Objects\Triggers and Switches\SwitchTrigger.cs" />
      <Compile Include="Assets\Scripts\Objects\Triggers and Switches\TriggerableObject.cs" />
+     <Compile Include="Assets\Scripts\Test_Scene_01_Scripts\Galacticod.cs" />
      <Compile Include="Assets\Scripts\Test_Scene_01_Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Test_Scene_01_Scripts\GuiScript.cs" />
      <Compile Include="Assets\Scripts\Utility\Callback.cs" />
      <Compile Include="Assets\Scripts\Utility\FSMState.cs" />
      <Compile Include="Assets\Scripts\Utility\FiniteStateMachine.cs" />
