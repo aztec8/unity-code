@@ -34,8 +34,9 @@ public class Galacticod : MonoBehaviour {
 	Controller controller;
 	public int numHands = 0;
 	
-	
 	public string location;
+
+	public int swipeCounter;
 	
 	
 	
@@ -63,6 +64,9 @@ public class Galacticod : MonoBehaviour {
 
 		location = "area1";
 		Debug.Log (location);
+
+		swipeCounter = 0;
+		Debug.Log (swipeCounter);
 	}
 	
 	// Update is called once per frame
@@ -70,6 +74,8 @@ public class Galacticod : MonoBehaviour {
 	{
 		// WASD controls for debugging
 		ProccessInput();
+
+
 		
 		Frame frame = controller.Frame();
 		//Debug.Log ("Frame id: "+ frame.Id + "timestamp: "+frame.Timestamp+"Hands: "+frame.Hands.Count+"fingers: "+frame.Fingers.Count+"tools: "+frame.Tools.Count);
@@ -77,9 +83,22 @@ public class Galacticod : MonoBehaviour {
 		//		forwardSwim.Normalize();
 		//		forwardSwim *= codSpeed;
 		//
-		//		if(frame.Fingers.Count > 2){
-		//			cc.Move(forwardSwim*Time.deltaTime);
-		//		}
+//		if(frame.Fingers.Count > 2){
+//			cc.Move(forwardSwim*Time.deltaTime);
+//			Debug.Log (frame.Hands [0].PalmPosition);
+		if(frame.Hands.Count == 1){
+			if (frame.Hands [0].PalmPosition.x < -50) {
+				Debug.Log("LEFt");
+				transform.Rotate(0,(-MOVEMENT_SPEED/2), 0);
+			}
+			if (frame.Hands [0].PalmPosition.x > 50) {
+				Debug.Log("RIGHT");
+				transform.Rotate(0,(MOVEMENT_SPEED/2),0);
+			}
+		}
+
+
+
 
 		
 		// Get gestures
@@ -117,6 +136,8 @@ public class Galacticod : MonoBehaviour {
 				//		        break;
 			case Gesture.GestureType.TYPESWIPE:
 				SwipeGesture swipe = new SwipeGesture (gesture);
+				swipeCounter++;
+				transform.Translate(forward);
 				//				cc.Move(forwardSwim*Time.deltaTime);
 				Debug.Log ("Swipe id: " + swipe.Id
 				           + ", " + swipe.State
@@ -144,7 +165,8 @@ public class Galacticod : MonoBehaviour {
 			}
 		}
 		
-		
+		// log out the stuff
+//		Debug.Log ("Gesture count: "+swipeCounter);
 		
 	}
 	
@@ -163,12 +185,12 @@ public class Galacticod : MonoBehaviour {
 		// right
 		if (Input.GetKey(KeyCode.D))
 		{
-			transform.Rotate(0,(MOVEMENT_SPEED/1),0);
+			transform.Rotate(0,(MOVEMENT_SPEED/2),0);
 		}
 		// left
 		if (Input.GetKey(KeyCode.A))
 		{
-			transform.Rotate(0,(-MOVEMENT_SPEED/1), 0);
+			transform.Rotate(0,(-MOVEMENT_SPEED/2), 0);
 		}
 
 
