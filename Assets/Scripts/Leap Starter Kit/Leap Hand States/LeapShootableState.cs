@@ -1,47 +1,48 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LeapShootableState : LeapState {
+public class LeapShootableState : LeapState
+{
 
-    LeapShootableObject shootableObj;
+		LeapShootableObject shootableObj;
 
-    public LeapShootableState() { }
+		public LeapShootableState ()
+		{
+		}
 
+		public LeapShootableState (LeapGameObject obj)
+		{
+				activeObj = obj;
+				shootableObj = (LeapShootableObject)obj;
+		}
 
-    public LeapShootableState(LeapGameObject obj)
-	{
-        activeObj = obj;
-        shootableObj = (LeapShootableObject)obj;
-	}
+		public override void Enter (HandTypeBase o)
+		{
+				handController = o;
+				if (activeObj)
+						handController.SetActiveObject (activeObj);
 
-    public override void Enter(HandTypeBase o)
-    {
-        handController = o;
-        if (activeObj)
-            handController.SetActiveObject(activeObj);
+				handController.HideHand ();
+		}
 
-        handController.HideHand();
-    }
-
-    public override void Execute()
-    {
-        if (handController.unityHand == null)
-            return;
+		public override void Execute ()
+		{
+				if (handController.unityHand == null)
+						return;
         
-        if (handController.activeObj)
-        {
-            // Update active object
-            activeObj.UpdateTransform(handController);
+				if (handController.activeObj) {
+						// Update active object
+						activeObj.UpdateTransform (handController);
 
-            shootableObj.CheckFireBullet();
+						shootableObj.CheckFireBullet ();
 
-            CheckEscape();
-        }
-    }
+						CheckEscape ();
+				}
+		}
 
-    public override void Exit()
-    {
-        handController.ShowHand();
-    }
+		public override void Exit ()
+		{
+				handController.ShowHand ();
+		}
 
 }
