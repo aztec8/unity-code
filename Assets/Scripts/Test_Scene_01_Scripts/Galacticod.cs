@@ -17,6 +17,7 @@ public class Galacticod : MonoBehaviour {
 	CharacterController cc;
 	GameObject galacticod;
 	public float MOVEMENT_SPEED = 0.4f;
+	public float TURN_SPEED = 5.0f;
 	
 	
 	//Movment vectors
@@ -27,8 +28,10 @@ public class Galacticod : MonoBehaviour {
 	//	public Vector3 side;
 	public Vector3 position;
 	public Vector3 acceleration;
+
 	public Vector3 velocity;
-	
+
+
 	
 	// LEAP vars
 	Controller controller;
@@ -72,6 +75,11 @@ public class Galacticod : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+
+		transform.Translate(Vector3.forward * (Time.deltaTime*8));
+//		galacticod.transform.position.x;
+//		galacticod.transform.position.y;
+//		galacticod.transform.position.z;
 		// WASD controls for debugging
 		ProccessInput();
 
@@ -87,13 +95,22 @@ public class Galacticod : MonoBehaviour {
 //			cc.Move(forwardSwim*Time.deltaTime);
 //			Debug.Log (frame.Hands [0].PalmPosition);
 		if(frame.Hands.Count == 1){
-			if (frame.Hands [0].PalmPosition.x < -50) {
-				Debug.Log("LEFt");
-				transform.Rotate(0,(-MOVEMENT_SPEED/2), 0);
+			Debug.Log (frame.Hands[0].PalmPosition);
+			if (frame.Hands [0].PalmPosition.y < 100) {
+				//Debug.Log("LEFt");
+				transform.Rotate(0,(-TURN_SPEED/2), 0);
 			}
-			if (frame.Hands [0].PalmPosition.x > 50) {
-				Debug.Log("RIGHT");
-				transform.Rotate(0,(MOVEMENT_SPEED/2),0);
+			if (frame.Hands [0].PalmPosition.y > 200) {
+				//Debug.Log("RIGHT");
+				transform.Rotate(0,(TURN_SPEED/2),0);
+			}
+			if (frame.Hands [0].PalmPosition.x > 100) {
+				Debug.Log("DOWN");
+				transform.Translate(down);
+			}
+			if (frame.Hands [0].PalmPosition.x < -100) {
+				Debug.Log("UP");
+				transform.Translate(up);
 			}
 		}
 
@@ -185,12 +202,12 @@ public class Galacticod : MonoBehaviour {
 		// right
 		if (Input.GetKey(KeyCode.D))
 		{
-			transform.Rotate(0,(MOVEMENT_SPEED/2),0);
+			transform.Rotate(0,(TURN_SPEED/2),0);
 		}
 		// left
 		if (Input.GetKey(KeyCode.A))
 		{
-			transform.Rotate(0,(-MOVEMENT_SPEED/2), 0);
+			transform.Rotate(0,(-TURN_SPEED/2), 0);
 		}
 
 
