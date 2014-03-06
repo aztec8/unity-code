@@ -71,8 +71,8 @@ public class Galacticod : MonoBehaviour {
 		GoForward(false);
 
 
-		Debug.Log ("Position: " + galacticod.transform.position + " | " +
-		           "Velocity: " + velocity);
+		//Debug.Log ("Position: " + galacticod.transform.position + " | " +
+		  //         "Velocity: " + velocity);
 
 
 		// WASD controls for debugging
