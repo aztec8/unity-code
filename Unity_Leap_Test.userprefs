@@ -1,11 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Test_Scene_01_Scripts\GameManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Ripple_Scripts/Clown_Fish_Swim.cs">
     <Files>
-      <File FileName="E:\LeapDeveloperKit\LeapSDK\samples\Sample.cs" Line="26" Column="3" />
-      <File FileName="Assets\Scripts\Test_Scene_01_Scripts\GameManager.cs" Line="34" Column="3" />
-      <File FileName="E:\RIT 3\Interactive Media Dev\James_Detwiler_HW_11\DroneSteer.cs" Line="40" Column="18" />
-      <File FileName="E:\RIT 3\Interactive Media Dev\James_Detwiler_HW_11\GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Ripple_Scripts/Clown_Fish_Swim.cs" Line="97" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
